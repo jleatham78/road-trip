@@ -1,30 +1,59 @@
-const API_KEY = "4e2bcc2c6d960eec2150089303018710"
-const API_URL = `https://developers.zomato.com/api/v2.1/search?lat=40.742051&lon=-74.004821`;
+const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.datepicker');
-    var instances = M.Datepicker.init(elems, format);
-  });
+const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
+var city = document.getElementById("events").value;
+const city_URL =
+  "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
+// document.addEventListener("DOMContentLoaded", function () {
+//   var elems = document.querySelectorAll(".datepicker");
+//   var instances = M.Datepicker.init(elems, format);
+// });
 
 var getRestaurants = function () {
-    //var apiUrl = "https://developers.zomato.com/api/v2.1/search?entity_type=city"
+  fetch(city_URL, {
+    headers: {
+      "user-key": food_KEY,
+    },
+  }).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+      var entityId = data.location_suggestions[0].city_id;
+      const food_URL =
+        `https://developers.zomato.com/api/v2.1/search?&entity_type=city&entity_id=` +
+        entityId;
+      fetch(food_URL, {
+        headers: {
+          "user-key": food_KEY,
+        },
+      }).then(function (response) {
+        response.json().then(function (data) {
+          console.log(data);
+          return;
+        });
+      });
+    });
+  });
+};
 
-    fetch(API_URL, 
-        {
-        headers: 
-        {
-         'user-key': API_KEY, 
-         }
-    })
-    .then(function(response) {
-        return response.json();
-      })
-       .then(function(response) {
-        console.log(response);
-    })
-}
+var getEvents = function () {
+  var city = document.getElementById("events").value;
+  const city_URL =
+    "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
 
-getRestaurants()
+  const event_URL =
+    "https://app.ticketmaster.com/discovery/v2/events.json?&city=" +
+    city +
+    "&apikey=RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
+  fetch(event_URL).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+    });
+  });
+};
 
+document.getElementById("search").addEventListener("click", getEvents);
+document.getElementById("search").addEventListener("click", getRestaurants);
+// getEvents();
+// getRestaurants();
 
-
+// linking ticketmaster API fetch

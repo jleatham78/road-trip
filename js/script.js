@@ -1,6 +1,11 @@
 const API_KEY = "4e2bcc2c6d960eec2150089303018710"
 const API_URL = `https://developers.zomato.com/api/v2.1/search?lat=40.742051&lon=-74.004821`;
 
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, format);
+  });
+
 var getRestaurants = function () {
     //var apiUrl = "https://developers.zomato.com/api/v2.1/search?entity_type=city"
 

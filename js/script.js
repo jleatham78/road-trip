@@ -1,4 +1,4 @@
-const eventContainerEl = document.getElementById("event-container");
+const eventContainerEl = document.getElementById("events-container");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const city = document.getElementById("events").value;
@@ -44,19 +44,25 @@ const getEvents = function () {
   fetch(event_URL).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
-      displayEvents(city);
+      displayEvents(data, city);
       console.log(city);
     });
   });
 
 };
 
-const displayEvents = function(events, searchTerm) {
+const displayEvents = function(data, searchTerm) {
   city.textContent = searchTerm;
+  var events = data._embedded.events;
+  for (i = 0; i < 6; i++) {
+      var eventName = events[i].name;
+      eventName.textContent = eventEl;
+      console.log(events[i].name);
 
-  for (i = 0; i < 5; i++) {
-      var eventName = embedded.events[0].name;
-      console.log(eventName);
+      var eventEl = document.createElement("p");
+      eventEl.textContent = events[i].name;
+      eventContainerEl.appendChild(eventEl);
+
   }
 }
 

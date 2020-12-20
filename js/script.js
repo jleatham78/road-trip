@@ -2,38 +2,43 @@ const eventContainerEl = document.getElementById("events-container");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const city = document.getElementById("events").value;
-const city_URL =
-  "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
+// const city_URL =
+//   "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
 // document.addEventListener("DOMContentLoaded", function () {
 //   const elems = document.querySelectorAll(".datepicker");
 //   const instances = M.Datepicker.init(elems, format);
 // });
 
 const getRestaurants = function () {
-  fetch(city_URL, {
+  // fetch(city_URL, {
+  //   headers: {
+  //     "user-key": food_KEY,
+  //   },
+  // }).then(function (response) {
+  // response.json().then(function (data) {
+  // console.log(data);
+  // const entityId = data.location_suggestions[0].city_id;
+  const food_URL =
+    "https://developers.zomato.com/api/v2.1/search?entity_type=city&lat=" +
+    eventLat +
+    "&lon=" +
+    eventLon;
+  fetch(food_URL, {
     headers: {
       "user-key": food_KEY,
     },
   }).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
-      const entityId = data.location_suggestions[0].city_id;
-      const food_URL =
-        `https://developers.zomato.com/api/v2.1/search?&entity_type=city&entity_id=` +
-        entityId;
-      fetch(food_URL, {
-        headers: {
-          "user-key": food_KEY,
-        },
-      }).then(function (response) {
-        response.json().then(function (data) {
-          console.log(data);
-          return;
-        });
-      });
+      displayRestaurants(data, city);
+      console.log(data.restaurants[0].restaurant.name);
     });
   });
+  // });
+  // });
 };
+
+const displayRestaurants = function () {};
 
 const getEvents = function () {
   const city = document.getElementById("events").value;
@@ -62,6 +67,11 @@ const displayEvents = function (data, searchTerm) {
 
     eventContainerEl.appendChild(eventEl);
   }
+  const eventLat = events[i]._embedded.venues[0].location.latitude;
+  const eventLon = events[i]._embedded.venues[0].location.longitude;
+  console.log(eventLat);
+  console.log(eventLon);
+  getRestaurants(eventLat, eventLon);
 };
 
 document.getElementById("search").addEventListener("click", getEvents);

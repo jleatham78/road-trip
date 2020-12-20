@@ -54,13 +54,12 @@ const getEvents = function () {
 const displayEvents = function(data, searchTerm) {
   city.textContent = searchTerm;
   var events = data._embedded.events;
-  for (i = 0; i < 6; i++) {
+  for (i = 0; i < 5; i++) {
       var eventName = events[i].name;
-      eventName.textContent = eventEl;
-      console.log(events[i].name);
-
-      var eventEl = document.createElement("p");
-      eventEl.textContent = events[i].name;
+    
+      var eventEl = document.createElement("a");
+      eventEl.classList = "collection-item";
+      eventEl.textContent = eventName;
       eventContainerEl.appendChild(eventEl);
 
   }

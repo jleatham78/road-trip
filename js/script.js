@@ -9,7 +9,11 @@ const city = document.getElementById("events").value;
 //   const instances = M.Datepicker.init(elems, format);
 // });
 
-const getRestaurants = function () {
+const getData = function () {
+  getEvents().then((data) => getRestaurants(data.latitude, data.longitude));
+};
+
+const getRestaurants = function (lat, lon) {
   // fetch(city_URL, {
   //   headers: {
   //     "user-key": food_KEY,
@@ -18,11 +22,13 @@ const getRestaurants = function () {
   // response.json().then(function (data) {
   // console.log(data);
   // const entityId = data.location_suggestions[0].city_id;
+
   const food_URL =
     "https://developers.zomato.com/api/v2.1/search?entity_type=city&lat=" +
-    eventLat +
+    lat +
     "&lon=" +
-    eventLon;
+    lon +
+    "&radius=100.0&sort=real_distance&order=asc";
   fetch(food_URL, {
     headers: {
       "user-key": food_KEY,
@@ -32,6 +38,7 @@ const getRestaurants = function () {
       console.log(data);
       displayRestaurants(data, city);
       console.log(data.restaurants[0].restaurant.name);
+      return;
     });
   });
   // });
@@ -39,18 +46,21 @@ const getRestaurants = function () {
 };
 
 const displayRestaurants = function () {};
-
+// gets the data from Event Api
 const getEvents = function () {
-  const city = document.getElementById("events").value;
-  const event_URL =
-    "https://app.ticketmaster.com/discovery/v2/events.json?&city=" +
-    city +
-    "&apikey=RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
-  fetch(event_URL).then(function (response) {
-    response.json().then(function (data) {
-      console.log(data);
-      displayEvents(data, city);
-      console.log(city);
+  return new Promise(function (resolve, reject) {
+    const city = document.getElementById("events").value;
+    const event_URL =
+      "https://app.ticketmaster.com/discovery/v2/events.json?&city=" +
+      city +
+      "&apikey=RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
+    fetch(event_URL).then(function (response) {
+      response.json().then(function (data) {
+        console.log(data);
+        displayEvents(data, city);
+        resolve(data._embedded.events[0]._embedded.venues[0].location);
+        console.log(city);
+      });
     });
   });
 };
@@ -58,6 +68,7 @@ const getEvents = function () {
 const displayEvents = function (data, searchTerm) {
   city.textContent = searchTerm;
   var events = data._embedded.events;
+  let i = 0;
   for (i = 0; i < 5; i++) {
     var eventName = events[i].name;
     var eventDate = events[i].dates.start.localDate;
@@ -67,15 +78,10 @@ const displayEvents = function (data, searchTerm) {
 
     eventContainerEl.appendChild(eventEl);
   }
-  const eventLat = events[i]._embedded.venues[0].location.latitude;
-  const eventLon = events[i]._embedded.venues[0].location.longitude;
-  console.log(eventLat);
-  console.log(eventLon);
-  getRestaurants(eventLat, eventLon);
 };
 
-document.getElementById("search").addEventListener("click", getEvents);
-document.getElementById("search").addEventListener("click", getRestaurants);
+document.getElementById("search").addEventListener("click", getData);
+
 // getEvents();
 // getRestaurants();
 

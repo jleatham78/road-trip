@@ -48,22 +48,21 @@ const getEvents = function () {
       console.log(city);
     });
   });
-
 };
 
-const displayEvents = function(data, searchTerm) {
+const displayEvents = function (data, searchTerm) {
   city.textContent = searchTerm;
   var events = data._embedded.events;
   for (i = 0; i < 5; i++) {
-      var eventName = events[i].name;
-    
-      var eventEl = document.createElement("a");
-      eventEl.classList = "collection-item";
-      eventEl.textContent = eventName;
-      eventContainerEl.appendChild(eventEl);
+    var eventName = events[i].name;
+    var eventDate = events[i].dates.start.localDate;
+    var eventEl = document.createElement("a");
+    eventEl.classList = "collection-item";
+    eventEl.textContent = eventName + eventDate;
 
+    eventContainerEl.appendChild(eventEl);
   }
-}
+};
 
 document.getElementById("search").addEventListener("click", getEvents);
 document.getElementById("search").addEventListener("click", getRestaurants);

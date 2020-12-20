@@ -1,15 +1,15 @@
+const eventContainerEl = document.getElementById("event-container");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
-
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
-var city = document.getElementById("events").value;
+const city = document.getElementById("events").value;
 const city_URL =
   "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
 // document.addEventListener("DOMContentLoaded", function () {
-//   var elems = document.querySelectorAll(".datepicker");
-//   var instances = M.Datepicker.init(elems, format);
+//   const elems = document.querySelectorAll(".datepicker");
+//   const instances = M.Datepicker.init(elems, format);
 // });
 
-var getRestaurants = function () {
+const getRestaurants = function () {
   fetch(city_URL, {
     headers: {
       "user-key": food_KEY,
@@ -17,7 +17,7 @@ var getRestaurants = function () {
   }).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
-      var entityId = data.location_suggestions[0].city_id;
+      const entityId = data.location_suggestions[0].city_id;
       const food_URL =
         `https://developers.zomato.com/api/v2.1/search?&entity_type=city&entity_id=` +
         entityId;
@@ -35,11 +35,8 @@ var getRestaurants = function () {
   });
 };
 
-var getEvents = function () {
-  var city = document.getElementById("events").value;
-  const city_URL =
-    "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
-
+const getEvents = function () {
+  const city = document.getElementById("events").value;
   const event_URL =
     "https://app.ticketmaster.com/discovery/v2/events.json?&city=" +
     city +
@@ -47,9 +44,21 @@ var getEvents = function () {
   fetch(event_URL).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
+      displayEvents(city);
+      console.log(city);
     });
   });
+
 };
+
+const displayEvents = function(events, searchTerm) {
+  city.textContent = searchTerm;
+
+  for (i = 0; i < 5; i++) {
+      var eventName = embedded.events[0].name;
+      console.log(eventName);
+  }
+}
 
 document.getElementById("search").addEventListener("click", getEvents);
 document.getElementById("search").addEventListener("click", getRestaurants);

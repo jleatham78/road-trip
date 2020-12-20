@@ -3,6 +3,9 @@ const restContainerEl = document.getElementById("restaurant-container");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const city = document.getElementById("events").value;
+var cityListName = document.getElementById("city-name");
+var restListName = document.getElementById("rest-name");
+  
 // const city_URL =
 //   "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
 // document.addEventListener("DOMContentLoaded", function () {
@@ -57,6 +60,7 @@ const getEvents = function () {
       response.json().then(function (data) {
         console.log(data);
         displayEvents(data, city);
+        //displayNames(city);
         resolve(data._embedded.events[0]._embedded.venues[0].location);
         console.log(city);
       });
@@ -79,6 +83,17 @@ const displayEvents = function (data) {
   }
 };
 
+const displayNames = function () {
+  cityListName = city;
+  restListName = city;
+
+  var createListEl = document.createElement("h4");
+  createListEl.innerHTML = "Showing events for " + cityListName;
+
+  eventContainerEl.appendChild(createListEl);
+
+}
+
 const displayRestaurants = function (data) {
    var restaurants = data.restaurants;
    let i = 0;
@@ -99,6 +114,7 @@ const displayRestaurants = function (data) {
 } 
 
 document.getElementById("search").addEventListener("click", getData);
+document.getElementById("search").addEventListener("click", displayNames);
 
 // getEvents();
 // getRestaurants();

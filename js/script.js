@@ -1,4 +1,5 @@
 const eventContainerEl = document.getElementById("events-container");
+const restContainerEl = document.getElementById("restaurant-container");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const city = document.getElementById("events").value;
@@ -45,8 +46,6 @@ const getRestaurants = function (lat, lon) {
   // });
 };
 
-const displayRestaurants = function () {};
-// gets the data from Event Api
 const getEvents = function () {
   return new Promise(function (resolve, reject) {
     const city = document.getElementById("events").value;
@@ -65,8 +64,8 @@ const getEvents = function () {
   });
 };
 
-const displayEvents = function (data, searchTerm) {
-  city.textContent = searchTerm;
+const displayEvents = function (data) {
+  //city.textContent = searchTerm;
   var events = data._embedded.events;
   let i = 0;
   for (i = 0; i < 5; i++) {
@@ -74,11 +73,30 @@ const displayEvents = function (data, searchTerm) {
     var eventDate = events[i].dates.start.localDate;
     var eventEl = document.createElement("a");
     eventEl.classList = "collection-item";
-    eventEl.textContent = eventName + eventDate;
+    eventEl.innerHTML = "Name: " + eventName + "<br>" + "Date: " + eventDate;
 
     eventContainerEl.appendChild(eventEl);
   }
 };
+
+const displayRestaurants = function (data) {
+   var restaurants = data.restaurants;
+   let i = 0;
+   for (i = 0; i < 5; i++) {
+      var restName = restaurants[i].restaurant.name;
+      var restEst = restaurants[i].restaurant.establishment[0];
+      var restCuis = restaurants[i].restaurant.cuisines;
+
+      var restEl = document.createElement("a");
+      restEl.classList = "collection-item";
+      restEl.innerHTML = "Name: " + restName + "<br>" + " Type: " + restEst + "<br>" + " Cuisine: " + restCuis;
+
+      restContainerEl.appendChild(restEl);
+
+
+
+   }
+} 
 
 document.getElementById("search").addEventListener("click", getData);
 

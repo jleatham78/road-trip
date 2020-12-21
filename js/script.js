@@ -45,7 +45,12 @@ const getRestaurants = function (lat, lon) {
   // });
 };
 
-const displayRestaurants = function () {};
+const displayRestaurants = function () {
+  const restaurants = data.
+  
+  for (i = 0; i < 5; i++) {
+    
+  };
 // gets the data from Event Api
 const getEvents = function () {
   return new Promise(function (resolve, reject) {

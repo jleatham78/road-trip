@@ -5,8 +5,8 @@ const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const city = document.getElementById("events").value;
 var cityListName = document.getElementById("city-name");
 var restListName = document.getElementById("rest-name");
-  
-// const city_URL =
+
+
 //   "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
 // document.addEventListener("DOMContentLoaded", function () {
 //   const elems = document.querySelectorAll(".datepicker");
@@ -87,10 +87,17 @@ const displayNames = function () {
   cityListName = city;
   restListName = city;
 
-  var createListEl = document.createElement("h4");
-  createListEl.innerHTML = "Showing events for " + cityListName;
+  var createListEl = document.createElement("h5");
+  createListEl.innerHTML = "Event Results " + cityListName;
 
   eventContainerEl.appendChild(createListEl);
+
+  // var createRestListEl = document.createElement("h5");
+  // createRestListEl.innerHTML = "Showing events for " + restListName;
+
+  
+
+
 
 }
 

@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
   </head>
   <body>
     <nav>
@@ -29,8 +29,48 @@
     </nav>
     <div class="row">
       <div class="col s2 #81c784 green lighten-2">
-        <input type="search" id="events" />
-        <input type="text" class="datepicker" />
+        <input placeholder="Enter City" type="search" id="events" />
+        <input placeholder="Enter Date" type="text" class="datepicker" />
+        
+        <form action="#">
+          <h6>Type of Event:</h6>
+          <p>
+            <label>
+              <input name="group1" type="radio" checked />
+              <span>Concerts</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input name="group1" type="radio" checked />
+              <span>Comedy</span>
+            </label>
+            </p>
+          <p>
+              <label>
+                <input name="group1" type="radio" checked />
+                <span>Sports</span>
+              </label>
+            </p>
+            <h6>Type of Cuisine:</h6>
+            <p>
+              <label>
+                <input name="group1" type="radio" checked />
+                <span>Chinese</span>
+              </label>
+            <p>
+              <p>
+                <label>
+                  <input name="group1" type="radio" checked />
+                  <span>Mexican</span>
+                </label>
+              <p>
+                <p>
+                  <label>
+                    <input name="group1" type="radio" checked />
+                    <span>American</span>
+                  </label>
+                <p>
         <button
           class="btn waves-effect waves-light #1a237e indigo darken-4"
           type="submit"
@@ -42,16 +82,17 @@
         </button>
       </div>
 
-      <div class="col s4">
-      <h4 id = "city-name"><span id="city-search"></span></h4>
+      <div class="col s5">
+      <h5 id = "city-name"><span id="city-search"></span></h5>
       <div class = "container collection" id = "events-container"></div>
-      <h4 id = "rest-name"><span id="city-search"></span></h4>
+      <h5 id = "rest-name"><span id="city-search"></span></h5>
       <div class ="row container collection" id = "restaurant-container"></div>
     </div>
 
-      <div class="col s6">TEST</div>
+      <div class="col s5">TEST</div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./js/script.js"></script>
   </body>
 </html>

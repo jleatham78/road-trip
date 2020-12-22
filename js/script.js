@@ -6,26 +6,11 @@ const city = document.getElementById("events").value;
 const cityListName = document.getElementById("city-name");
 const restListName = document.getElementById("rest-name");
 
-//   "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
-// document.addEventListener("DOMContentLoaded", function () {
-//   const elems = document.querySelectorAll(".datepicker");
-//   const instances = M.Datepicker.init(elems, format);
-// });
-
 const getData = function () {
   getEvents().then((data) => getRestaurants(data.latitude, data.longitude));
 };
 
 const getRestaurants = function (lat, lon) {
-  // fetch(city_URL, {
-  //   headers: {
-  //     "user-key": food_KEY,
-  //   },
-  // }).then(function (response) {
-  // response.json().then(function (data) {
-  // console.log(data);
-  // const entityId = data.location_suggestions[0].city_id;
-
   const food_URL =
     "https://developers.zomato.com/api/v2.1/search?entity_type=city&lat=" +
     lat +
@@ -44,8 +29,6 @@ const getRestaurants = function (lat, lon) {
       return;
     });
   });
-  // });
-  // });
 };
 
 const getEvents = function () {
@@ -59,7 +42,6 @@ const getEvents = function () {
       response.json().then(function (data) {
         console.log(data);
         displayEvents(data, city);
-        //displayNames(city);
         resolve(data._embedded.events[0]._embedded.venues[0].location);
         console.log(city);
       });
@@ -68,7 +50,6 @@ const getEvents = function () {
 };
 
 const displayEvents = function (data) {
-  //city.textContent = searchTerm;
   const events = data._embedded.events;
   for (let i = 0; i < 5; i++) {
     const eventName = events[i].name;
@@ -85,9 +66,6 @@ const displayNames = function () {
   createListEl.innerHTML = "Event Results " + cityListName;
 
   eventContainerEl.appendChild(createListEl);
-
-  // var createRestListEl = document.createElement("h5");
-  // createRestListEl.innerHTML = "Showing events for " + restListName;
 };
 
 const displayRestaurants = function (data) {
@@ -118,8 +96,3 @@ document.getElementById("search").addEventListener("click", function (event) {
   getData();
   displayNames();
 });
-
-// getEvents();
-// getRestaurants();
-
-// linking ticketmaster API fetch

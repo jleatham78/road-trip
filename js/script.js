@@ -79,13 +79,25 @@ const displayRestaurants = function (data) {
   }
 };
 
+//get value of event type dropdown
+const getEventValue = function() {
+  const getEventType = document.getElementById("event-input");
+  const result = getEventType.options[getEventType.selectedIndex].text;
+  console.log(result); 
+}
+
+//get value of cuisine type dropdown
+const getCuisineValue = function() {
+  const getCuisineType = document.getElementById("cuisine-input");
+  const result = getCuisineType.options[getCuisineType.selectedIndex].text;
+  console.log(result);
+}
+
+
 document.getElementById("search").addEventListener("click", function (event) {
   event.preventDefault();
   getData();
   displayNames();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems, options);
+  getEventValue();
+  getCuisineValue();
 });

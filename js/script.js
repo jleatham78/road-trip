@@ -58,6 +58,7 @@ const displayEvents = function (data) {
   }
 };
 
+//still need to get the city name to display on header and move outside the box
 const displayNames = function () {
   cityListName = city;
   restListName = city;
@@ -82,4 +83,9 @@ document.getElementById("search").addEventListener("click", function (event) {
   event.preventDefault();
   getData();
   displayNames();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, options);
 });

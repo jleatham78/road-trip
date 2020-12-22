@@ -58,6 +58,7 @@ const displayEvents = function (data) {
   }
 };
 
+//still need to get the city name to display on header and move outside the box
 const displayNames = function () {
   cityListName = city;
   restListName = city;
@@ -78,8 +79,25 @@ const displayRestaurants = function (data) {
   }
 };
 
+//get value of event type dropdown
+const getEventValue = function() {
+  const getEventType = document.getElementById("event-input");
+  const result = getEventType.options[getEventType.selectedIndex].text;
+  console.log(result); 
+}
+
+//get value of cuisine type dropdown
+const getCuisineValue = function() {
+  const getCuisineType = document.getElementById("cuisine-input");
+  const result = getCuisineType.options[getCuisineType.selectedIndex].text;
+  console.log(result);
+}
+
+
 document.getElementById("search").addEventListener("click", function (event) {
   event.preventDefault();
   getData();
   displayNames();
+  getEventValue();
+  getCuisineValue();
 });

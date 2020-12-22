@@ -32,45 +32,30 @@
         <input placeholder="Enter City" type="search" id="events" />
         <input placeholder="Enter Date" type="text" class="datepicker" />
         
-        <form action="#">
-          <h6>Type of Event:</h6>
-          <p>
-            <label>
-              <input name="group1" type="radio" checked />
-              <span>Concerts</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input name="group1" type="radio" checked />
-              <span>Comedy</span>
-            </label>
-            </p>
-          <p>
-              <label>
-                <input name="group1" type="radio" checked />
-                <span>Sports</span>
-              </label>
-            </p>
-            <h6>Type of Cuisine:</h6>
-            <p>
-              <label>
-                <input name="group1" type="radio" checked />
-                <span>Chinese</span>
-              </label>
-            <p>
-              <p>
-                <label>
-                  <input name="group1" type="radio" checked />
-                  <span>Mexican</span>
-                </label>
-              <p>
-                <p>
-                  <label>
-                    <input name="group1" type="radio" checked />
-                    <span>American</span>
-                  </label>
-                <p>
+        <div class="input-field col s12">
+          <select class = "browser-default" id = "event-input">
+            <option value="" disabled selected>Select Event Type</option>
+            <option value="1">Music</option>
+            <option value="2">Sports</option>
+          </select>
+          
+        </div>
+                          
+          <div class="input-field col s12">
+            <select class = "browser-default" id= "cuisine-input">
+              <option value="" disabled selected>Select Cuisine Type</option>
+              <option value="1">Fast Food</option>
+              <option value="2">Chinese</option>
+              <option value="3">American</option>
+              <option value="4">Steak</option>
+              <option value="5">Sandwich</option>
+              <option value="6">Bar Food</option>
+              <option value="7">Seafood</option>
+              <option value="8">Mexican</option>
+              <option value="9">Cafe</option>
+            </select>
+          </div>
+    
         <button
           class="btn waves-effect waves-light #1a237e indigo darken-4"
           type="submit"

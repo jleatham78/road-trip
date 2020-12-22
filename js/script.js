@@ -3,8 +3,8 @@ const restContainerEl = document.getElementById("restaurant-container");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const city = document.getElementById("events").value;
-const cityListName = document.getElementById("city-name");
-const restListName = document.getElementById("rest-name");
+let cityListName = document.getElementById("city-name");
+let restListName = document.getElementById("rest-name");
 
 const getData = function () {
   getEvents().then((data) => getRestaurants(data.latitude, data.longitude));
@@ -70,24 +70,11 @@ const displayNames = function () {
 
 const displayRestaurants = function (data) {
   const restaurants = data.restaurants;
-  let i = 0;
-  for (i = 0; i < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     const restName = restaurants[i].restaurant.name;
     const restEst = restaurants[i].restaurant.establishment[0];
-    const restCuis = restaurants[i].restaurant.cuisineconst;
-    const restEl = document.createElement("a");
-    restEl.classList = "collection-item";
-    restEl.innerHTML =
-      "Name: " +
-      restName +
-      "<br>" +
-      " Type: " +
-      restEst +
-      "<br>" +
-      " Cuisine: " +
-      restCuis;
-
-    restContainerEl.appendChild(restEl);
+    const restCuis = restaurants[i].restaurant.cuisines;
+    restContainerEl.innerHTML += `<a class="collection-item" data-id="${i}">Name: ${restName}<br />Type: ${restEst}<br/ >Cuisine: ${restCuis}</a>`;
   }
 };
 

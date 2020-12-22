@@ -1,8 +1,11 @@
 const eventContainerEl = document.getElementById("events-container");
+const restContainerEl = document.getElementById("restaurant-container");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const city = document.getElementById("events").value;
-// const city_URL =
+var cityListName = document.getElementById("city-name");
+var restListName = document.getElementById("rest-name");
+
 //   "https://developers.zomato.com/api/v2.1/locations?&query=" + city;
 // document.addEventListener("DOMContentLoaded", function () {
 //   const elems = document.querySelectorAll(".datepicker");
@@ -45,13 +48,6 @@ const getRestaurants = function (lat, lon) {
   // });
 };
 
-const displayRestaurants = function () {
-  const restaurants = data.
-  
-  for (i = 0; i < 5; i++) {
-    
-  };
-// gets the data from Event Api
 const getEvents = function () {
   return new Promise(function (resolve, reject) {
     const city = document.getElementById("events").value;
@@ -63,6 +59,7 @@ const getEvents = function () {
       response.json().then(function (data) {
         console.log(data);
         displayEvents(data, city);
+        //displayNames(city);
         resolve(data._embedded.events[0]._embedded.venues[0].location);
         console.log(city);
       });
@@ -70,22 +67,58 @@ const getEvents = function () {
   });
 };
 
-const displayEvents = function (data, searchTerm) {
-  city.textContent = searchTerm;
-  var events = data._embedded.events;
-  let i = 0;
-  for (i = 0; i < 5; i++) {
-    var eventName = events[i].name;
-    var eventDate = events[i].dates.start.localDate;
-    var eventEl = document.createElement("a");
-    eventEl.classList = "collection-item";
-    eventEl.textContent = eventName + eventDate;
-
-    eventContainerEl.appendChild(eventEl);
+const displayEvents = function (data) {
+  //city.textContent = searchTerm;
+  const events = data._embedded.events;
+  for (let i = 0; i < 5; i++) {
+    const eventName = events[i].name;
+    const eventDate = events[i].dates.start.localDate;
+    eventContainerEl.innerHTML += `<a class="collection-item" data-id="${i}">Name: ${eventName}<br />Date: ${eventDate}</a>`;
   }
 };
 
-document.getElementById("search").addEventListener("click", getData);
+const displayNames = function () {
+  cityListName = city;
+  restListName = city;
+
+  const createListEl = document.createElement("h5");
+  createListEl.innerHTML = "Event Results " + cityListName;
+
+  eventContainerEl.appendChild(createListEl);
+
+  // var createRestListEl = document.createElement("h5");
+  // createRestListEl.innerHTML = "Showing events for " + restListName;
+};
+
+const displayRestaurants = function (data) {
+  var restaurants = data.restaurants;
+  let i = 0;
+  for (i = 0; i < 5; i++) {
+    var restName = restaurants[i].restaurant.name;
+    var restEst = restaurants[i].restaurant.establishment[0];
+    var restCuis = restaurants[i].restaurant.cuisines;
+
+    var restEl = document.createElement("a");
+    restEl.classList = "collection-item";
+    restEl.innerHTML =
+      "Name: " +
+      restName +
+      "<br>" +
+      " Type: " +
+      restEst +
+      "<br>" +
+      " Cuisine: " +
+      restCuis;
+
+    restContainerEl.appendChild(restEl);
+  }
+};
+
+document.getElementById("search").addEventListener("click", function (event) {
+  event.preventDefault();
+  getData();
+  displayNames();
+});
 
 // getEvents();
 // getRestaurants();

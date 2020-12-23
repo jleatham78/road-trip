@@ -1,5 +1,7 @@
 const eventContainerEl = document.getElementById("events-container");
 const restContainerEl = document.getElementById("restaurant-container");
+const eventCardContainerEl = document.getElementById("event-details")
+const restCardContainerEl = document.getElementById("rest-details");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const cityTitleEl = document.querySelector("#city-name");
@@ -24,6 +26,7 @@ const getRestaurants = function (lat, lon) {
     response.json().then(function (data) {
       console.log(data);
       displayRestaurants(data);
+      displayRestDetails(data);
       console.log(data.restaurants[0].restaurant.name);
       return;
     });
@@ -41,6 +44,7 @@ const getEvents = function () {
       response.json().then(function (data) {
         console.log(data);
         displayEvents(data);
+        displayEventDetails(data);
         resolve(data._embedded.events[0]._embedded.venues[0].location);
         console.log(city);
       });
@@ -72,6 +76,52 @@ const displayRestaurants = function (data) {
   }
 };
 
+const displayEventDetails = function (data) {
+  //when user clicks on an event or restaurant 
+  document.querySelectorAll("#events-container").forEach(function(item){
+    item.addEventListener("click", function () {
+     
+      const name = data._embedded.events[0].name;
+      const genre = data._embedded.events[0].classifications[0].genre.name;
+      const dates = data._embedded.events[0].dates.start.localDate;
+      const prices = data._embedded.events[0].priceRanges[0].min;
+      const venue = data._embedded.events[0]._embedded.venues[0].name;
+      const address = data._embedded.events[0]._embedded.venues[0].address.line1;
+      const status = data._embedded.events[0].dates.status.code;
+      eventCardContainerEl.innerHTML += `<a class="card">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</a>`;
+  
+      
+    })
+
+    // images[0].url, 
+    // url to ticketmaster (href)
+    
+  }) 
+
+}
+
+const displayRestDetails = function (data) {
+  //when user clicks on an event or restaurant 
+  document.querySelectorAll("#restaurant-container").forEach(function(item){
+    item.addEventListener("click", function () {
+     
+      const restName = data.restaurants[0].restaurant.name;
+      const restAddress = data.restaurants[0].restaurant.location.address;
+      const restPhone = data.restaurants[0].restaurant.phone_numbers;
+      const restTimings = data.restaurants[0].restaurant.timings;
+      const restPrice = data.restaurants[0].restaurant.price_range;
+
+      restCardContainerEl.innerHTML += `<a class="card">Name: ${restName}<br />Address: ${restAddress}<br/ >Phone: ${restPhone}<br />Offerings: ${restTimings}<br />Price: ${restPrice}</a>`;
+  
+      
+    })
+
+    // images[0].url, 
+    // url to ticketmaster (href)
+    
+  }) 
+
+}
 document.getElementById("search").addEventListener("click", function (event) {
   event.preventDefault();
   const city = document.getElementById("events").value;

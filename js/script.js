@@ -80,7 +80,8 @@ const displayEventDetails = function (data) {
   //when user clicks on an event or restaurant 
   document.querySelectorAll("#events-container").forEach(function(item){
     item.addEventListener("click", function () {
-     
+
+      //const image = data._embedded.events[0].images[0].url;
       const name = data._embedded.events[0].name;
       const genre = data._embedded.events[0].classifications[0].genre.name;
       const dates = data._embedded.events[0].dates.start.localDate;
@@ -88,9 +89,8 @@ const displayEventDetails = function (data) {
       const venue = data._embedded.events[0]._embedded.venues[0].name;
       const address = data._embedded.events[0]._embedded.venues[0].address.line1;
       const status = data._embedded.events[0].dates.status.code;
-      eventCardContainerEl.innerHTML += `<a class="card">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</a>`;
-  
-      
+      eventCardContainerEl.innerHTML += `<p class="card-content">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</p>`;
+       
     })
 
     // images[0].url, 
@@ -111,7 +111,7 @@ const displayRestDetails = function (data) {
       const restTimings = data.restaurants[0].restaurant.timings;
       const restPrice = data.restaurants[0].restaurant.price_range;
 
-      restCardContainerEl.innerHTML += `<a class="card">Name: ${restName}<br />Address: ${restAddress}<br/ >Phone: ${restPhone}<br />Offerings: ${restTimings}<br />Price: ${restPrice}</a>`;
+      restCardContainerEl.innerHTML += `<p class="card-content">Name: ${restName}<br />Address: ${restAddress}<br/ >Phone: ${restPhone}<br />Offerings: ${restTimings}<br />Price: ${restPrice}</p>`;
   
       
     })

@@ -59,7 +59,7 @@ const displayEvents = function (data) {
 };
 
 const displayNames = function (city) {
-  cityTitleEl.innerHTML = `<h5>Event Results for: ${city}</h5>`;
+  cityTitleEl.innerHTML = `<h5>Showing Events and Restaurants for: ${city}</h5>`;
 };
 
 const displayRestaurants = function (data) {

@@ -1,6 +1,7 @@
 const eventContainerEl = document.getElementById("events-container");
 const restContainerEl = document.getElementById("restaurant-container");
-const eventCardContainerEl = document.getElementById("event-details")
+const eventCardContainerEl = document.getElementById("event-details");
+const eventCardLinkContainerEl = document.getElementById("event-url");
 const restCardContainerEl = document.getElementById("rest-details");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
@@ -81,7 +82,6 @@ const displayEventDetails = function (data) {
   document.querySelectorAll("#events-container").forEach(function(item){
     item.addEventListener("click", function () {
 
-      //const image = data._embedded.events[0].images[0].url;
       const name = data._embedded.events[0].name;
       const genre = data._embedded.events[0].classifications[0].genre.name;
       const dates = data._embedded.events[0].dates.start.localDate;
@@ -89,12 +89,18 @@ const displayEventDetails = function (data) {
       const venue = data._embedded.events[0]._embedded.venues[0].name;
       const address = data._embedded.events[0]._embedded.venues[0].address.line1;
       const status = data._embedded.events[0].dates.status.code;
+      const url = data._embedded.events[0].url
+      const image = data._embedded.events[0]._embedded.venues[0].images[0];
+        
+
+      //eventCardContainerEl.appendChild(image);
       eventCardContainerEl.innerHTML += `<p class="card-content">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</p>`;
-       
+      eventCardLinkContainerEl.innerHTML += `<a>Tickets: ${url}</a>`; 
+      eventCardContainerEl.appendChild(eventCardLinkContainerEl);
     })
 
     // images[0].url, 
-    // url to ticketmaster (href)
+    // url to ticketmaster (href)#
     
   }) 
 

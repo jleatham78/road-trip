@@ -94,8 +94,9 @@ const displayEventDetails = function (data) {
         
 
       //eventCardContainerEl.appendChild(image);
+      console.log(name);
       eventCardContainerEl.innerHTML += `<p class="card-content">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</p>`;
-      eventCardLinkContainerEl.innerHTML += `<a>Tickets: ${url}</a>`; 
+      eventCardLinkContainerEl.innerHTML += `<a class="card-action" href=${url}>Purchase Tickets</a>`; 
       eventCardContainerEl.appendChild(eventCardLinkContainerEl);
     })
 

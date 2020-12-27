@@ -1,6 +1,7 @@
 const eventContainerEl = document.getElementById("events-container");
 const restContainerEl = document.getElementById("restaurant-container");
 const eventCardContainerEl = document.getElementById("event-details");
+const eventCardImageContainerEl = document.getElementById("event-image");
 const eventCardLinkContainerEl = document.getElementById("event-url");
 const restCardContainerEl = document.getElementById("rest-details");
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
@@ -90,11 +91,10 @@ const displayEventDetails = function (data) {
       const address = data._embedded.events[0]._embedded.venues[0].address.line1;
       const status = data._embedded.events[0].dates.status.code;
       const url = data._embedded.events[0].url
-      const image = data._embedded.events[0]._embedded.venues[0].images[0];
+      const image = data._embedded.events[0]._embedded.venues[0].images[1].url;
         
 
-      //eventCardContainerEl.appendChild(image);
-      console.log(name);
+      eventCardImageContainerEl.innerHTML +=`<img class="card-image" src="${image}">`;
       eventCardContainerEl.innerHTML += `<p class="card-content">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</p>`;
       eventCardLinkContainerEl.innerHTML += `<a class="card-action" href=${url}>Purchase Tickets</a>`; 
       eventCardContainerEl.appendChild(eventCardLinkContainerEl);

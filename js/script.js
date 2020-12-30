@@ -3,7 +3,9 @@ const restContainerEl = document.getElementById("restaurant-container");
 const eventCardContainerEl = document.getElementById("event-details");
 const eventCardImageContainerEl = document.getElementById("event-image");
 const eventCardLinkContainerEl = document.getElementById("event-url");
+const restCardImageContainerEl = document.getElementById("rest-image");
 const restCardContainerEl = document.getElementById("rest-details");
+const restCardLinkContainerEl = document.getElementById("rest-url")
 const food_KEY = "4e2bcc2c6d960eec2150089303018710";
 const event_KEY = "RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
 const cityTitleEl = document.querySelector("#city-name");
@@ -88,7 +90,7 @@ const displayEventDetails = function (data) {
       const dates = data._embedded.events[index].dates.start.localDate;
       const prices = data._embedded.events[index].priceRanges[0].min;
       const venue = data._embedded.events[index]._embedded.venues[0].name;
-      const address = data._embedded.events[index]._embedded.vensues[0].address.line1;
+      const address = data._embedded.events[index]._embedded.venues[0].address.line1;
       const status = data._embedded.events[index].dates.status.code;
       const url = data._embedded.events[index].url
       const image = data._embedded.events[index]._embedded.venues[0].images[0].url;
@@ -106,22 +108,24 @@ const displayEventDetails = function (data) {
 
 const displayRestDetails = function (data) {
   //when user clicks on an event or restaurant 
-  document.querySelectorAll("#restaurant-container").forEach(function(item){
+  document.querySelectorAll("#restaurant-container").forEach(function(item, index){
     item.addEventListener("click", function () {
      
-      const restName = data.restaurants[0].restaurant.name;
-      const restAddress = data.restaurants[0].restaurant.location.address;
-      const restPhone = data.restaurants[0].restaurant.phone_numbers;
-      const restTimings = data.restaurants[0].restaurant.timings;
-      const restPrice = data.restaurants[0].restaurant.price_range;
+      const restaurantName = data.restaurants[index].restaurant.name;
+      const restAddress = data.restaurants[index].restaurant.location.address;
+      const restPhone = data.restaurants[index].restaurant.phone_numbers;
+      const restTimings = data.restaurants[index].restaurant.timings;
+      const restPrice = data.restaurants[index].restaurant.price_range;
+      const restImage = data.restaurants[index].restaurant.featured_image;
+      const restLink = data.restaurants[index].restaurant.menu_url
 
-      restCardContainerEl.innerHTML += `<p class="card-content">Name: ${restName}<br />Address: ${restAddress}<br/ >Phone: ${restPhone}<br />Offerings: ${restTimings}<br />Price: ${restPrice}</p>`;
+      restCardImageContainerEl.innerHTML +=`<img class="card-image" src="${restImage}">`;
+      restCardContainerEl.innerHTML += `<p class="card-content">Name: ${restaurantName}<br />Address: ${restAddress}<br/ >Phone: ${restPhone}<br />Offerings: ${restTimings}<br />Price: ${restPrice}</p>`;
+      restCardLinkContainerEl.innerHTML += `<a class="card-action" href=${restLink}>Menu</a>`;
+      restCardContainerEl.appendChild(restCardLinkContainerEl);
   
       
     })
-
-    // images[0].url, 
-    // url to ticketmaster (href)
     
   }) 
 

@@ -80,18 +80,18 @@ const displayRestaurants = function (data) {
 
 const displayEventDetails = function (data) {
   //when user clicks on an event or restaurant 
-  document.querySelectorAll("#events-container").forEach(function(item){
+  document.querySelectorAll("#events-container").forEach(function(item, index){
     item.addEventListener("click", function () {
 
-      const name = data._embedded.events[0].name;
-      const genre = data._embedded.events[0].classifications[0].genre.name;
-      const dates = data._embedded.events[0].dates.start.localDate;
-      const prices = data._embedded.events[0].priceRanges[0].min;
-      const venue = data._embedded.events[0]._embedded.venues[0].name;
-      const address = data._embedded.events[0]._embedded.venues[0].address.line1;
-      const status = data._embedded.events[0].dates.status.code;
-      const url = data._embedded.events[0].url
-      const image = data._embedded.events[0]._embedded.venues[0].images[1].url;
+      const name = data._embedded.events[index].name;
+      const genre = data._embedded.events[index].classifications[0].genre.name;
+      const dates = data._embedded.events[index].dates.start.localDate;
+      const prices = data._embedded.events[index].priceRanges[0].min;
+      const venue = data._embedded.events[index]._embedded.venues[0].name;
+      const address = data._embedded.events[index]._embedded.vensues[0].address.line1;
+      const status = data._embedded.events[index].dates.status.code;
+      const url = data._embedded.events[index].url
+      const image = data._embedded.events[index]._embedded.venues[0].images[0].url;
         
 
       eventCardImageContainerEl.innerHTML +=`<img class="card-image" src="${image}">`;
@@ -99,9 +99,6 @@ const displayEventDetails = function (data) {
       eventCardLinkContainerEl.innerHTML += `<a class="card-action" href=${url}>Purchase Tickets</a>`; 
       eventCardContainerEl.appendChild(eventCardLinkContainerEl);
     })
-
-    // images[0].url, 
-    // url to ticketmaster (href)#
     
   }) 
 

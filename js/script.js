@@ -67,7 +67,7 @@ const displayEvents = function (data) {
 };
 
 const displayNames = function (city) {
-  cityTitleEl.innerHTML = `<h5>Showing Events and Restaurants for: ${city}</h5>`;
+  cityTitleEl.innerHTML = `<h5>Showing Events and Restaurants for ${city}</h5>`;
 };
 
 const displayRestaurants = function (data) {
@@ -80,31 +80,59 @@ const displayRestaurants = function (data) {
   }
 };
 
-const displayEventDetails = function (data) {
-  //when user clicks on an event or restaurant 
-  document.querySelectorAll("#events-container").forEach(function(item, index){
-    item.addEventListener("click", function () {
+// const displayEventDetails = function (data) {
+//   //when user clicks on an event or restaurant 
+//   document.querySelectorAll("#events-container").forEach(function(item){
+//     item.addEventListener("click", function (index) {
 
-      const name = data._embedded.events[index].name;
-      const genre = data._embedded.events[index].classifications[0].genre.name;
-      const dates = data._embedded.events[index].dates.start.localDate;
-      const prices = data._embedded.events[index].priceRanges[0].min;
-      const venue = data._embedded.events[index]._embedded.venues[0].name;
-      const address = data._embedded.events[index]._embedded.venues[0].address.line1;
-      const status = data._embedded.events[index].dates.status.code;
-      const url = data._embedded.events[index].url
-      const image = data._embedded.events[index]._embedded.venues[0].images[0].url;
+//       const name = data._embedded.events[index].name;
+//       const genre = data._embedded.events[index].classifications[0].genre.name;
+//       const dates = data._embedded.events[index].dates.start.localDate;
+//       const prices = data._embedded.events[index].priceRanges[0].min;
+//       const venue = data._embedded.events[index]._embedded.venues[0].name;
+//       const address = data._embedded.events[index]._embedded.venues[0].address.line1;
+//       const status = data._embedded.events[index].dates.status.code;
+//       const url = data._embedded.events[index].url
+//       const image = data._embedded.events[index]._embedded.venues[0].images[0].url;
         
 
-      eventCardImageContainerEl.innerHTML +=`<img class="card-image" src="${image}">`;
-      eventCardContainerEl.innerHTML += `<p class="card-content">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</p>`;
-      eventCardLinkContainerEl.innerHTML += `<a class="card-action" href=${url}>Purchase Tickets</a>`; 
-      eventCardContainerEl.appendChild(eventCardLinkContainerEl);
-    })
+//       eventCardImageContainerEl.innerHTML +=`<img class="card-image" src="${image}">`;
+//       eventCardContainerEl.innerHTML += `<p class="card-content">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</p>`;
+//       eventCardLinkContainerEl.innerHTML += `<a class="card-action" href=${url}>Purchase Tickets</a>`; 
+//       eventCardContainerEl.appendChild(eventCardLinkContainerEl);
+//     })
     
-  }) 
+//   }) 
 
+// }
+
+const displayEventDetails = function (data) {
+  
+    document.getElementById("events-container").addEventListener("click", function () {
+      for (let i = 0; i < 5; i++) {
+        console.log(i);
+        if (data._embedded.events[i].indexOf(i)) {
+     
+
+      const name = $("<p>").addClass("card-title").text("Name: " + data._embedded.events[i].name);
+
+      const genre = $("<p>").addClass("card-content").text("Type: " + data._embedded.events[i].classifications[0].genre.name);
+      const dates = $("<p>").addClass("card-content").text("Dates: " + data._embedded.events[i].dates.start.localDate);
+      const prices = $("<p>").addClass("card-content").text("Prices: " + data._embedded.events[i].priceRanges[0].min);
+      const venue = $("<p>").addClass("card-content").text("Venue: " + data._embedded.events[i]._embedded.venues[0].name);
+      const address = $("<p>").addClass("card-content").text("Address: " + data._embedded.events[i]._embedded.venues[0].address.line1);
+      const status = $("<p>").addClass("card-content").text("Status: " + data._embedded.events[i].dates.status.code);
+      //const url = $("<a>").addClass("card-action").data._embedded.events[index].url
+      //const image = $("<img>").attr("src", + data._embedded.events[index]._embedded.venues[0].images[0].url;
+      $("#event-details").append(name, genre, dates, prices, venue, address, status);    
+
+        }
+    }
+  })
 }
+  
+
+
 
 const displayRestDetails = function (data) {
   //when user clicks on an event or restaurant 
@@ -136,3 +164,4 @@ document.getElementById("search").addEventListener("click", function (event) {
   getData(city);
   displayNames(city);
 });
+  

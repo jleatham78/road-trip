@@ -81,12 +81,11 @@ const displayRestaurants = function (data) {
   const restaurants = data.restaurants;
   for (let i = 0; i < 5; i++) {
     const restName = restaurants[i].restaurant.name;
-    const restEst = restaurants[i].restaurant.establishment[0];
     const restCuis = restaurants[i].restaurant.cuisines;
     const restaurant = restaurants[i].restaurant
     const restDiv = document.createElement("a");
     restDiv.setAttribute("class", "collection-item")
-    restDiv.innerHTML += `Name: ${restName}<br />Establishment Type: ${restEst}<br />Cuisine: ${restCuis}`;
+    restDiv.innerHTML += `Name: ${restName}<br />Cuisine: ${restCuis}`;
     restDiv.onclick = function () {
       displayRestDetails(restaurant);
     };
@@ -99,32 +98,40 @@ const displayEventDetails = function (event) {
       const name = event.name;
       const genre = event.classifications[0].genre.name;
       const dates = event.dates.start.localDate;
-      const prices = event.priceRanges[0].min;
       const venue = event._embedded.venues[0].name;
       const address = event._embedded.venues[0].address.line1;
       const status = event.dates.status.code;
       const url = event.url
       const image = event._embedded.venues[0].images[0].url;
-        
 
+      eventCardContainerEl.innerHTML = "";
+      eventCardLinkContainerEl.innerHTML = "";
+      eventCardImageContainerEl.innerHTML = "";
+        
+      eventCardContainerEl.appendChild(eventCardImageContainerEl);
       eventCardImageContainerEl.innerHTML +=`<img class="card-image" src="${image}">`;
       eventCardContainerEl.innerHTML += `<p class="card-content">Name: ${name}<br />Genre: ${genre}<br/ >Dates: ${dates}<br />Venue: ${venue}<br />Address: ${address}<br />Status: ${status}</p>`;
       eventCardLinkContainerEl.innerHTML += `<a class="card-action" target= "blank" href=${url}>Purchase Tickets</a>`; 
       eventCardContainerEl.appendChild(eventCardLinkContainerEl);
+      
  
 }
-
 
 const displayRestDetails = function (restaurant) {
 
       const restaurantName = restaurant.name;
-      const restAddress = restaurant.address;
+      const restAddress = restaurant.location.address;
       const restPhone = restaurant.phone_numbers;
       const restTimings = restaurant.timings;
       const restPrice = restaurant.price_range;
       const restImage = restaurant.featured_image;
       const restLink = restaurant.menu_url
 
+      restCardContainerEl.innerHTML = "";
+      restCardLinkContainerEl.innerHTML = "";
+      restCardImageContainerEl.innerHTML = "";
+
+      restCardContainerEl.appendChild(restCardImageContainerEl);
       restCardImageContainerEl.innerHTML +=`<img class="card-image" src="${restImage}">`;
       restCardContainerEl.innerHTML += `<p class="card-content">Name: ${restaurantName}<br />Address: ${restAddress}<br/ >Phone: ${restPhone}<br />Offerings: ${restTimings}<br />Price: ${restPrice}</p>`;
       restCardLinkContainerEl.innerHTML += `<a class="card-action" target="blank" href=${restLink}>Menu</a>`;

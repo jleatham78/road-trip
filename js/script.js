@@ -101,7 +101,7 @@ const displayEventDetails = function (event) {
       const venue = event._embedded.venues[0].name;
       const address = event._embedded.venues[0].address.line1;
       const status = event.dates.status.code;
-      const url = event.url
+      const url = event._embedded.attractions[0].url;
       const image = event._embedded.venues[0].images[0].url;
 
       eventCardContainerEl.innerHTML = "";

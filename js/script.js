@@ -168,9 +168,8 @@ if (localStorage.getItem("city-name") && localStorage.getItem("date")) {
   console.log(localStorage.getItem("city-name"));
   document.getElementById("city").value = localStorage.getItem("city-name");
   document.getElementById("month-search").value = localStorage.getItem("date");
-  displayEvents();
-  displayNames();
-  displayRestaurants();
+  getData(localStorage.getItem("city-name"), localStorage.getItem("date"));
+  displayNames(localStorage.getItem("city-name"));
 }
 
 // get a localstorage to be a save button on the card so when the user likes a event or restaurant, they can press the save button to save for next time.

@@ -12,32 +12,39 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
+    <link rel="stylesheet" href="https://fonts.gstatic.com"/>
+    <link rel="stylesheet" href="./assets/css/styling.css"/>
   </head>
   <body>
     <nav>
       <nav>
-        <div class="nav-wrapper #42a5f5 blue lighten-1">
-          <div class="col s12">
-            <a href="#!" class="breadcrumb">Event</a>
-            <a href="#!" class="breadcrumb">Dinner</a>
-            <a href="#!" class="breadcrumb">Results</a>
+        <div class="nav-wrapper #ff5722 deep-orange">
+          <div class="col s12 m2">
+            <p class="z-depth-5">
+            <a href="#!" class="breadcrumb brand-logo"> Event Planning</a>
+            </p>
           </div>
         </div>
       </nav>
     </nav>
     <div class="row">
+<<<<<<< HEAD
       <div class="col s2 #81c784 green lighten-2">
         <input placeholder="Enter City Name you want to search in" type="search" id="city" />
+=======
+      <div class="col s2 #e6ee9c lime lighten-3 z-depth-3" type="search" id="city" id="search-bar">
+        <input placeholder="Enter City of Interest" type="search" id="city" class="tooltipped" data-tooltip="Input city of interest"/>
+>>>>>>> css
         <input placeholder="Enter Date" type="month" id="month-search" class="datepicker" style="max-width:100%"/>
         
         <button
-          class="btn waves-effect waves-light #1a237e indigo darken-4"
+          class="btn btn-small waves-effect waves-light #64b5f6 blue lighten-2"
           type="submit"
           name="action"
           id="search"
         >
           Search Events
-          <i class="material-icons right"></i>
+          <i class="material-icons right">send</i>
         </button>
       </div>
 
@@ -54,35 +61,21 @@
           <div class="col s12 m7">
             <div class="card" id = "event-details">
               <div class="card-image" id = "event-image">
-                
             </div>
-            
-            <div id= "event-url">
-                        
-            </div>
-          </div>
+            <div id= "event-url"></div>
           </div>
         </div>
-      
-
-            
+   
         <div class="row">
           <div class="col s12 m7">
             <div class="card" id = "rest-details">
               <div class="card-image" id = "rest-image"></div>
-
-            
-              <div id= "rest-url">
-                        
-              </div>
+              <div id= "rest-url"></div>
             </div>
-          </div>
-              
+          </div>    
         </div>
-        </div>
-    
-    
-
+      </div>
+      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./js/script.js"></script>
   </body>

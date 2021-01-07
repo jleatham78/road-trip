@@ -12,10 +12,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="cssstyling" href="assets/css/styling.css"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://fonts.gstatic.com"/>
+    <link rel="stylesheet" href="./assets/css/styling.css"/>
   </head>
   <body>
     <nav>
@@ -30,7 +28,7 @@
       </nav>
     </nav>
     <div class="row">
-      <div class="col s2 #e6ee9c lime lighten-3 z-depth-3">
+      <div class="col s2 #e6ee9c lime lighten-3 z-depth-3" id="search-bar">
         <input placeholder="Enter City of Interest" type="search" id="city" class="tooltipped" data-tooltip="Input city of interest"/>
         <input placeholder="Enter Date" type="month" id="month-search" class="datepicker" style="max-width:100%"/>
         
@@ -58,37 +56,22 @@
           <div class="col s12 m7">
             <div class="card" id = "event-details">
               <div class="card-image" id = "event-image">
-                
             </div>
-            
-            <div id= "event-url">
-                        
-            </div>
-          </div>
+            <div id= "event-url"></div>
           </div>
         </div>
-      
-
-            
+   
         <div class="row">
           <div class="col s12 m7">
             <div class="card" id = "rest-details">
               <div class="card-image" id = "rest-image"></div>
-
-            
-              <div id= "rest-url">
-                        
-              </div>
+              <div id= "rest-url"></div>
             </div>
-          </div>
-              
+          </div>    
         </div>
-        </div>
-    
-
-
+      </div>
+      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./js/script.js"></script>
-    <script src="./styling.js"></script>
   </body>
 </html>

@@ -172,8 +172,6 @@ if (localStorage.getItem("city-name") && localStorage.getItem("date")) {
   displayNames(localStorage.getItem("city-name"));
 }
 
-
-
 // get a localstorage to be a save button on the card so when the user likes a event or restaurant, they can press the save button to save for next time.
 
 // sorting the events and restaurants by date input to sort the results of both when pressing search events.

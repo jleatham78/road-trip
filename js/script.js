@@ -30,11 +30,9 @@ const getRestaurants = function (lat, lon) {
     },
   }).then(function (response) {
     response.json().then(function (data) {
-      console.log(data);
-
+    
       displayRestaurants(data);
-      //displayRestDetails(data);
-      console.log(data.restaurants[0].restaurant.name);
+  
       return;
     });
   });
@@ -48,21 +46,17 @@ const getEvents = function (city, dateSearch) {
       "&apikey=RpHsNFdNJ9Ukvz7Qw5PwGoIRGwUTzyDP";
     fetch(event_URL).then(function (response) {
       response.json().then(function (data) {
-        console.log(data);
         const filterEvents = data._embedded.events.filter(function (event) {
           return event.dates.start.localDate.slice(0, 7) === dateSearch;
         });
         displayEvents(filterEvents);
-        //displayEventDetails(data);
         resolve(data._embedded.events[0]._embedded.venues[0].location);
-        console.log(city);
       });
     });
   });
 };
 
 const displayEvents = function (events) {
-  console.log(events.length);
   eventContainerEl.innerHTML = "";
   if (events.length) {
     for (let i = 0; i < events.length; i++) {
@@ -104,7 +98,6 @@ const displayRestaurants = function (data) {
 };
 
 const displayEventDetails = function (event) {
-  // save event to localstorage
   const name = event.name;
   const genre = event.classifications[0].genre.name;
   const dates = event.dates.start.localDate;
@@ -126,7 +119,6 @@ const displayEventDetails = function (event) {
 };
 
 const displayRestDetails = function (restaurant) {
-  // save restaurant to localstorage
   const restaurantName = restaurant.name;
   const restAddress = restaurant.location.address;
   const restPhone = restaurant.phone_numbers;
@@ -155,7 +147,6 @@ document.getElementById("search").addEventListener("click", function (event) {
     return;
   }
   const dateSearch = document.getElementById("month-search").value;
-  // save city and date to localstorage
   localStorage.setItem("city-name", cityVal);
   localStorage.setItem("date", dateSearch);
   const cities = localStorage.getItem("city-name");
@@ -165,13 +156,9 @@ document.getElementById("search").addEventListener("click", function (event) {
 });
 
 if (localStorage.getItem("city-name") && localStorage.getItem("date")) {
-  console.log(localStorage.getItem("city-name"));
   document.getElementById("city").value = localStorage.getItem("city-name");
   document.getElementById("month-search").value = localStorage.getItem("date");
   getData(localStorage.getItem("city-name"), localStorage.getItem("date"));
   displayNames(localStorage.getItem("city-name"));
 }
 
-// get a localstorage to be a save button on the card so when the user likes a event or restaurant, they can press the save button to save for next time.
-
-// sorting the events and restaurants by date input to sort the results of both when pressing search events.

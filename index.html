@@ -17,21 +17,26 @@
   <body>
     <nav>
       <nav>
-        <div class="nav-wrapper #ff5722 deep-orange">
+        <div class="nav-wrapper #000000 black">
           <div class="col s12 m2">
-            <p class="z-depth-5">
-            <a href="#!" class="breadcrumb brand-logo">EZ Plan</a>
+            <a class="brand-logo center">EZ Plan<i class="material-icons">event</i></a>
+            
           </div>
         </div>
       </nav>
     </nav>
+    <section>
+      <div>
+        <img class="hero" src="assets/images/cityscape.jpg">
+      </div>
+    </section>
     <div class="row">
-      <div class="col s2 #e6ee9c lime lighten-3 z-depth-3" id="search-bar">
+      <div class="col s2 #e0e0e0 grey lighten-2 z-depth-3" id="search-bar">
         <input placeholder="Enter City of Interest" type="search" id="city"/>
         <input placeholder="Enter Date" type="month" id="month-search" class="datepicker" style="max-width:100%"/>
         
         <button
-          class="btn btn-small waves-effect waves-light #64b5f6 blue lighten-2"
+          class="btn btn-small waves-effect waves-light #000000 black"
           type="submit"
           name="action"
           id="search"
@@ -51,7 +56,7 @@
 
       <div class="col s5" >
         <div class="row">
-          <div class="col s12 m7">
+          <div class="col s12 m7" id="event-details-container">
             <div class="card" id = "event-details">
               <div class="card-image" id = "event-image">
             </div>

@@ -6,3 +6,7 @@ The user can click on an event and see the details, including a link to purchase
 
 The user's search is saved through Local Storage, so when they return to the page their information is still available.
 
+https://jleatham78.github.io/road-trip/
+
+![image](https://user-images.githubusercontent.com/73211852/104142052-ff55ee00-5376-11eb-8df0-955bc479f27b.png)
+
